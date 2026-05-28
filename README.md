@@ -47,16 +47,26 @@ Inspired by the orchestration pattern behind Perplexity Computer — built as a 
 ## Quick Start
 
 ```bash
-# 1. Copy to your Hermes skills directory
-cp -r polybrain ~/.hermes/skills/research/
+# 1. Clone and install
+git clone --depth=1 https://github.com/mosesman831/PolyBrain.git /tmp/polybrain
+rm -rf /tmp/polybrain/.git
+cp -r /tmp/polybrain ~/.hermes/skills/research/polybrain
+rm -rf /tmp/polybrain
 
 # 2. Edit config.yaml with your model aliases
 #    (orchestrator, researcher, builder, synthesizer, verifier, fallback)
+hermes config edit  # then edit ~/.hermes/skills/research/polybrain/config.yaml
 
 # 3. Validate config
 python ~/.hermes/skills/research/polybrain/scripts/validate_config.py
 
-# 4. Run
+# 4. Use it — just tell Hermes what you want in a chat:
+# "Use PolyBrain to research Apple's latest earnings and competitors"
+# Hermes will load the skill and run the orchestration script for you.
+```
+
+For advanced/manual use, you can also run the script directly:
+```bash
 echo "Summarize Apple's latest quarterly earnings with sources" | \
   python ~/.hermes/skills/research/polybrain/scripts/orchestrate.py
 ```
@@ -98,6 +108,12 @@ flowchart TD
 
 ## Example
 
+Tell Hermes:
+```
+Use PolyBrain to research Apple's latest quarterly earnings and competitors
+```
+
+Or run the script directly:
 ```bash
 echo "Summarize Apple's latest quarterly earnings with sources" | \
   python ~/.hermes/skills/research/polybrain/scripts/orchestrate.py
