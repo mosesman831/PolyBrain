@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <b>A multi-agent orchestration layer for Hermes Agent.</b><br/>
+  <b>A multi-agent, multi-model orchestration layer for Hermes Agent.</b><br/>
   Parallel research. Clean synthesis. Verified claims.
 </p>
 
@@ -35,14 +35,21 @@
 
 PolyBrain turns a single objective into a coordinated multi-agent workflow: it decomposes the task, routes work to specialized roles, executes subtasks in parallel, synthesizes the outputs, and verifies every claim against cited sources.
 
-Inspired by the orchestration pattern behind Perplexity Computer — built as a local, config-driven, reproducible skill with a polished, high-trust workflow.
+Inspired by the orchestration pattern behind Perplexity Computer - built as a local, config-driven, reproducible skill with a polished, high-trust workflow.
 
 ## Why PolyBrain
 
-- **Designed for high-signal work** — built to keep outputs focused, sourced, and useful.
-- **Parallel by default** — research and build tasks run concurrently to reduce wait time.
-- **Source-first** — claims must be backed by citations, not vibes.
-- **Verification built in** — final output is checked claim-by-claim before it reaches you.
+- **Designed for high-signal work** - built to keep outputs focused, sourced, and useful.
+- **Parallel by default** - research and build tasks run concurrently to reduce wait time.
+- **Source-first** - claims must be backed by citations, not vibes.
+- **Verification built in** - final output is checked claim-by-claim before it reaches you.
+- **Multi-model by design** - route different roles to different models/providers in `config.yaml`.
+
+### How PolyBrain is different
+
+- **Multi-model, not just multi-agent** — different roles can use different LLMs, not just different agents on the same model.
+- **Verification layer** — claims are checked against sources before the final answer is returned.
+- **Citation enforcement** — uncited claims are dropped, not silentlyincluded.
 
 ## Quick Start
 
@@ -60,8 +67,8 @@ hermes config edit  # then edit ~/.hermes/skills/research/polybrain/config.yaml
 # 3. Validate config
 python ~/.hermes/skills/research/polybrain/scripts/validate_config.py
 
-# 4. Use it — just tell Hermes what you want in a chat:
-# "Use PolyBrain to research Apple's latest earnings and competitors"
+# 4. Use it - just tell Hermes what you want in a chat:
+"Use PolyBrain to research Apple's latest earnings and competitors"
 # Hermes will load the skill and run the orchestration script for you.
 ```
 
@@ -88,13 +95,13 @@ flowchart TD
 
 ## Features
 
-- **Premium orchestration flow** — clean task splitting, parallel execution, and final synthesis.
-- **Citation enforcement** — researchers must include URLs; uncited claims are dropped.
-- **Source verification** — the verifier checks each claim against its source and returns PASS/FAIL.
-- **Robust JSON parsing** — orchestrator output is recovered even when models add extra prose.
-- **Retry logic** — transient failures are retried before the run is marked failed.
-- **Role-based routing** — assign different models/providers per role in `config.yaml`.
-- **Artifact logging** — every run is saved in a timestamped folder for traceability.
+- **Premium orchestration flow** - clean task splitting, parallel execution, and final synthesis.
+- **Citation enforcement** - researchers must include URLs; uncited claims are dropped.
+- **Source verification** - the verifier checks each claim against its source and returns PASS/FAIL.
+- **Robust JSON parsing** - orchestrator output is recovered even when models add extra prose.
+- **Retry logic** - transient failures are retried before the run is marked failed.
+- **Role-based routing** - assign different models/providers per role in `config.yaml`.
+- **Artifact logging** - every run is saved in a timestamped folder for traceability.
 
 ## Roles
 
@@ -171,7 +178,7 @@ polybrain/
 │   ├── architecture.md               # Design docs + data flow
 │   ├── prompts.md                    # Versioned prompt templates
 │   ├── schema.json                   # JSON schema for orchestrator output
-│   ├── json-output-parsing.md         # JSON robustness strategy
+│   ├── json-output-parsing.md        # JSON robustness strategy
 │   └── example-run.md                # Example objective → final output
 └── scripts/
     ├── orchestrate.py                # Production runner (parallel + sequential)
@@ -181,8 +188,8 @@ polybrain/
 
 ## Known Issues
 
-- **Model-specific hangs** — Some models (e.g. `gpt-5-mini` via certain providers) can hang in `hermes chat` subagent calls. If a model hangs for 300s+, try a different model or provider. Test with `hermes chat -q "ping" -m your-model` first.
-- **Verifier may truncate numbers** — Some models strip leading digits from dollar amounts in verification reports. The PASS/FAIL verdicts remain structurally valid.
+- **Model-specific hangs** - Some models (e.g. `gpt-5-mini` via certain providers) can hang in `hermes chat` subagent calls. If a model hangs for 300s+, try a different model or provider. Test with `hermes chat -q "ping" -m your-model` first.
+- **Verifier may truncate numbers** - Some models strip leading digits from dollar amounts in verification reports. The PASS/FAIL verdicts remain structurally valid.
 
 ## License
 
