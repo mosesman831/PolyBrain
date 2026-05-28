@@ -2,8 +2,8 @@
 name: polybrain
 description: "Use when you need multi-model orchestration: decompose a high-level objective into subtasks, route each to a specialized model, run in parallel, synthesize, then verify."
 version: 1.0.0
-author: Moses / Lexa
-license: MIT
+author: "Moses / LatticeAG"
+license: GPL-3.0
 metadata:
   hermes:
     tags: [orchestration, multi-model, subagents, parallel, routing, research]
