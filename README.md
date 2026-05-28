@@ -1,12 +1,48 @@
-# PolyBrain
+# PolyBrain 🧠
 
-Multi-model orchestration skill for [Hermes Agent](https://github.com/nousresearch/hermes-agent).
+<p align="center">
+  <a href="https://github.com/mosesman831/PolyBrain/blob/main/LICENSE">
+    <img src="https://img.shields.io/github/license/mosesman831/PolyBrain?style=for-the-badge" alt="License" />
+  </a>
+  <a href="https://www.python.org/">
+    <img src="https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
+  </a>
+  <a href="https://github.com/mosesman831/PolyBrain/stargazers">
+    <img src="https://img.shields.io/github/stars/mosesman831/PolyBrain?style=for-the-badge" alt="GitHub stars" />
+  </a>
+  <a href="https://github.com/mosesman831/PolyBrain/issues">
+    <img src="https://img.shields.io/github/issues/mosesman831/PolyBrain?style=for-the-badge" alt="GitHub issues" />
+  </a>
+  <a href="https://github.com/mosesman831/PolyBrain">
+    <img src="https://img.shields.io/github/languages/top/mosesman831/PolyBrain?style=for-the-badge" alt="Top language" />
+  </a>
+</p>
 
-Decomposes a high-level objective into parallel subtasks, routes each to a specialized model,
-runs them concurrently, synthesizes the results, and verifies claims against cited sources.
+<p align="center">
+  <b>A multi-agent orchestration layer for Hermes Agent.</b><br/>
+  Parallel research. Clean synthesis. Verified claims.
+</p>
 
-Inspired by the orchestration pattern behind Perplexity Computer — built as a local,
-config-driven, reproducible skill.
+<p align="center">
+  <a href="#quick-start">Quick Start</a> ·
+  <a href="#why-polybrain">Why PolyBrain</a> ·
+  <a href="#how-it-works">How It Works</a> ·
+  <a href="#features">Features</a> ·
+  <a href="#configuration">Configuration</a>
+</p>
+
+---
+
+PolyBrain turns a single objective into a coordinated multi-agent workflow: it decomposes the task, routes work to specialized roles, executes subtasks in parallel, synthesizes the outputs, and verifies every claim against cited sources.
+
+Inspired by the orchestration pattern behind Perplexity Computer — built as a local, config-driven, reproducible skill with a polished, high-trust workflow.
+
+## Why PolyBrain
+
+- **Designed for high-signal work** — built to keep outputs focused, sourced, and useful.
+- **Parallel by default** — research and build tasks run concurrently to reduce wait time.
+- **Source-first** — claims must be backed by citations, not vibes.
+- **Verification built in** — final output is checked claim-by-claim before it reaches you.
 
 ## Quick Start
 
@@ -27,40 +63,52 @@ echo "Summarize Apple's latest quarterly earnings with sources" | \
 
 ## How It Works
 
-```
-Objective → Orchestrator (JSON task list)
-                │
-        ┌───────┴───────┐
-        │ Parallel        │
-        ├─ Researcher 1   │
-        ├─ Researcher 2   │
-        ├─ Builder        │
-        └───────┬───────┘
-                │
-         Synthesizer → unified brief (citations only)
-                │
-          Verifier → PASS/FAIL per claim
+```mermaid
+flowchart TD
+  A[Objective] --> B[Orchestrator]
+  B --> C1[Researcher 1]
+  B --> C2[Researcher 2]
+  B --> C3[Builder]
+  C1 --> D[Synthesizer]
+  C2 --> D
+  C3 --> D
+  D --> E[Verifier]
+  E --> F[Final Answer]
 ```
 
 ## Features
 
-- **Citation enforcement** — Researchers must cite URLs; synthesizer drops uncited claims.
-- **Source verification** — Verifier checks each claim against cited sources (PASS/FAIL).
-- **Parallel execution** — Researcher + builder tasks run concurrently via ThreadPoolExecutor.
-- **JSON repair** — Orchestrator output is auto-parsed even if the model adds prose or markdown.
-- **Retry logic** — Both orchestrator and subtask failures trigger retries before giving up.
-- **Model/provider routing** — Per-role model + provider overrides via config.yaml.
-- **Full artifact logging** — Every run creates a timestamped folder with all inputs/outputs.
+- **Premium orchestration flow** — clean task splitting, parallel execution, and final synthesis.
+- **Citation enforcement** — researchers must include URLs; uncited claims are dropped.
+- **Source verification** — the verifier checks each claim against its source and returns PASS/FAIL.
+- **Robust JSON parsing** — orchestrator output is recovered even when models add extra prose.
+- **Retry logic** — transient failures are retried before the run is marked failed.
+- **Role-based routing** — assign different models/providers per role in `config.yaml`.
+- **Artifact logging** — every run is saved in a timestamped folder for traceability.
 
 ## Roles
 
 | Role | Purpose | Toolsets |
 |------|---------|----------|
-| **Orchestrator** | Decompose objective into JSON task list | text-only |
-| **Researcher** | Web search + citations (enforced) | web, browser |
-| **Builder** | Code/terminal/file operations | terminal, file |
-| **Synthesizer** | Merge outputs into final deliverable | (optional) |
+| **Orchestrator** | Decompose objective into a JSON task plan | text-only |
+| **Researcher** | Web search + citations | web, browser |
+| **Builder** | Code, terminal, and file operations | terminal, file |
+| **Synthesizer** | Merge outputs into the final deliverable | optional |
 | **Verifier** | Verify claims against cited sources | web |
+
+## Example
+
+```bash
+echo "Summarize Apple's latest quarterly earnings with sources" | \
+  python ~/.hermes/skills/research/polybrain/scripts/orchestrate.py
+```
+
+### What you get
+
+- A decomposed task plan
+- Parallel research with citations
+- A synthesized final brief
+- Claim-by-claim verification
 
 ## Configuration
 
@@ -88,9 +136,17 @@ settings:
 
 See [`config.yaml`](config.yaml) for all options.
 
+## Learn More
+
+- [Architecture](references/architecture.md)
+- [Prompt Templates](references/prompts.md)
+- [JSON Schema](references/schema.json)
+- [JSON Parsing Strategy](references/json-output-parsing.md)
+- [Example Run](references/example-run.md)
+
 ## File Tree
 
-```
+```text
 polybrain/
 ├── SKILL.md                          # Skill definition (Hermes)
 ├── README.md                         # This file
@@ -99,7 +155,7 @@ polybrain/
 │   ├── architecture.md               # Design docs + data flow
 │   ├── prompts.md                    # Versioned prompt templates
 │   ├── schema.json                   # JSON schema for orchestrator output
-│   ├── json-output-parsing.md        # JSON robustness strategy
+│   ├── json-output-parsing.md         # JSON robustness strategy
 │   └── example-run.md                # Example objective → final output
 └── scripts/
     ├── orchestrate.py                # Production runner (parallel + sequential)
@@ -109,11 +165,8 @@ polybrain/
 
 ## Known Issues
 
-- **Model-specific hangs** — Some models (e.g., gpt-5-mini via certain providers) hang
-  in `hermes chat` subagent calls. If a model hangs for 300s+, try a different model
-  or provider. Test with `hermes chat -q "ping" -m your-model` first.
-- **Verifier may truncate numbers** — Some models strip leading digits from dollar
-  amounts in verification reports. The PASS/FAIL verdicts remain structurally valid.
+- **Model-specific hangs** — Some models (e.g. `gpt-5-mini` via certain providers) can hang in `hermes chat` subagent calls. If a model hangs for 300s+, try a different model or provider. Test with `hermes chat -q "ping" -m your-model` first.
+- **Verifier may truncate numbers** — Some models strip leading digits from dollar amounts in verification reports. The PASS/FAIL verdicts remain structurally valid.
 
 ## License
 
