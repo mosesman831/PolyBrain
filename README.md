@@ -47,9 +47,9 @@ Inspired by the orchestration pattern behind Perplexity Computer - built as a lo
 
 ### How PolyBrain is different
 
-- **Multi-model, not just multi-agent** - different roles can use different LLMs, not just different agents on the same model.
+- **Multi-model, not just multi-agent** - different roles can use different LLMs, not just different agents on the same model. Unlike Hermes's native `delegate_task` and Kanban - which spin up subagents but bind them all to the same model config - PolyBrain routes each role independently. Run DeepSeek for research, Claude for synthesis, GPT-4o for verification. Same pipeline, genuinely different brains.
 - **Verification layer** - claims are checked against sources before the final answer is returned.
-- **Citation enforcement** - uncited claims are dropped, not silentlyincluded.
+- **Citation enforcement** - uncited claims are dropped, not silently included.
 
 ## Quick Start
 
