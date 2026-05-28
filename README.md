@@ -47,9 +47,9 @@ Inspired by the orchestration pattern behind Perplexity Computer - built as a lo
 
 ### How PolyBrain is different
 
-- **Multi-model, not just multi-agent** — different roles can use different LLMs, not just different agents on the same model.
-- **Verification layer** — claims are checked against sources before the final answer is returned.
-- **Citation enforcement** — uncited claims are dropped, not silentlyincluded.
+- **Multi-model, not just multi-agent** - different roles can use different LLMs, not just different agents on the same model.
+- **Verification layer** - claims are checked against sources before the final answer is returned.
+- **Citation enforcement** - uncited claims are dropped, not silentlyincluded.
 
 ## Quick Start
 
