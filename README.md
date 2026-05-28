@@ -1,4 +1,4 @@
-# PolyBrain 🧠
+# LatticeAG PolyBrain 🧠
 
 <p align="center">
   <a href="https://github.com/mosesman831/PolyBrain/blob/main/LICENSE">
@@ -170,4 +170,4 @@ polybrain/
 
 ## License
 
-MIT
+GNU General Public License version 3
