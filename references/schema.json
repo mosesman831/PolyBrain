@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "required": ["tasks", "notes"],
+  "properties": {
+    "tasks": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "required": ["id", "role", "goal", "context", "toolsets", "expected_output"],
+        "properties": {
+          "id": {"type": "string"},
+          "role": {"type": "string", "enum": ["researcher", "builder", "synthesizer", "verifier"]},
+          "goal": {"type": "string"},
+          "context": {"type": "string"},
+          "toolsets": {"type": "array", "items": {"type": "string"}},
+          "expected_output": {"type": "string"},
+          "model_alias": {"type": "string"}
+        }
+      }
+    },
+    "notes": {"type": "string"}
+  }
+}

@@ -1,0 +1,35 @@
+# PolyBrain Configuration
+# Users: set your model aliases below on first use.
+# Run: python scripts/validate_config.py
+
+models:
+  orchestrator: ""
+  researcher: ""
+  builder: ""
+  synthesizer: ""
+  verifier: ""
+  fallback: ""
+
+# Optional: force provider per role (empty = use Hermes default)
+providers:
+  orchestrator: ""
+  researcher: ""
+  builder: ""
+  synthesizer: ""
+  verifier: ""
+  fallback: ""
+
+# Optional: define toolsets per role (informational)
+toolsets:
+  researcher: ["web", "browser"]
+  builder: ["terminal", "file"]
+  synthesizer: ["file"]
+  verifier: ["web"]
+
+settings:
+  max_parallel: 3
+  timeout_sec: 300
+  retry_count: 1
+  orchestrator_timeout_sec: 120
+  orchestrator_retry_count: 1
+  artifacts_dir: ".hermes/plans/polybrain"
