@@ -16,6 +16,19 @@
   <a href="https://github.com/mosesman831/PolyBrain">
     <img src="https://img.shields.io/github/languages/top/mosesman831/PolyBrain?style=for-the-badge" alt="Top language" />
   </a>
+    <a href="https://github.com/MShawon/github-clone-count-badge">
+      <img
+        alt="GitHub Clones"
+        src="https://img.shields.io/badge/dynamic/json?color=success&label=Clones&query=count&url=https://gist.githubusercontent.com/mosesman831/f4492c457974754d327d0ae618ccd94c/raw/clone.json&logo=github&style=for-the-badge"
+       />
+  </a>
+  <a href="https://github.com/MShawon/github-clone-count-badge">
+    <img
+      alt="GitHub Traffic"
+      src="https://img.shields.io/badge/dynamic/json?color=success&label=Views&query=count&url=https://gist.githubusercontent.com/mosesman831/fbdcd5a245c9614ec15071130aace14f/raw/traffic.json&logo=github&style=for-the-badge"
+    />
+  </a>
+  
 </p>
 
 <p align="center">
