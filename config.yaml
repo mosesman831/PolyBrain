@@ -28,7 +28,7 @@ toolsets:
 
 settings:
   max_parallel: 3
-  timeout_sec: 300
+  timeout_sec: 600
   retry_count: 1
   orchestrator_timeout_sec: 120
   orchestrator_retry_count: 1
